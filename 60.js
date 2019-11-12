@@ -9,7 +9,7 @@ console.log('%cEx. #60 Solution:\n', 'color:orange');
 
 var gRounds = 1;
 var gMaxRounds = 1000;
-var gInterval = 1000/8;
+var gInterval = 500;
 var gRowSize = 10;
 var gColSize = 10;
 var initialPopulationDensity = 1
@@ -83,14 +83,11 @@ function play() {
 function countPeopleAround(pos) {
     var peopleCount = 0;
     for (var i = pos.i - 1; i <= pos.i + 1; i++) {
-        // if i is out of bounderies - go to the next i 
-        if (i < 0 || i > gBoard.length - 1) continue; //continue to the next i 
+        if (i < 0 || i > gBoard.length - 1) continue; 
 
         for (var j = pos.j - 1; j <= pos.j + 1; j++) {
-            // if j is out of bounderies - go to the next j:
-            if (j < 0 || j > gBoard[0].length - 1) continue; // continue to the next j.
-
-            if (i === pos.i && j === pos.j) continue; //if its users cell continue;
+            if (j < 0 || j > gBoard[0].length - 1) continue; 
+            if (i === pos.i && j === pos.j) continue; 
             if (gBoard[i][j] === 'X') peopleCount++;
         }
     }
