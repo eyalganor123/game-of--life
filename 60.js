@@ -7,24 +7,25 @@
 
 console.log('%cEx. #60 Solution:\n', 'color:orange');
 
-var gRounds = 1
-var gGameInterval;
-var interval = 500;
+var gRounds = 1;
+var gMaxRounds = 1000;
+var gInterval = 1000/8;
 var gRowSize = 10;
 var gColSize = 10;
+var initialPopulationDensity = 1
 var gBoard = createBoard(gRowSize, gColSize);
 init()
 
 function init() {
-    populateInital(.5);
+    populateInital(initialPopulationDensity);
     console.table(gBoard)
-    gGameInterval = setInterval(function () {
+    var gGameInterval = setInterval(function () {
         play();
         gRounds++;
-        if (checkAllDead()) {
+        if (checkAllDead() || gRounds === gMaxRounds) {
             clearInterval(gGameInterval)
         }
-    }, interval);
+    }, gInterval);
 }
 
 function createBoard(rowSize, colSize) {
@@ -51,7 +52,7 @@ function populateInital(density) {
 }
 
 function runGeneration(board) {
-    var copyMat = [ ...board ];
+    var copyMat = [...board];
     for (var i = 0; i < copyMat.length; i++) {
         var row = copyMat[i];
         for (var j = 0; j < row.length; j++) {
@@ -62,7 +63,7 @@ function runGeneration(board) {
             var peopleCount = countPeopleAround(pos);
             if (peopleCount >= 3 && peopleCount <= 5) {
                 copyMat[i][j] = 'X';
-            } else   {
+            } else {
                 copyMat[i][j] = '';
             }
         }
@@ -96,10 +97,17 @@ function countPeopleAround(pos) {
     return peopleCount;
 }
 
-function checkAllDead(
+function checkAllDead() {
 
-) {
-    return false
+    for (var i = 0; i < gBoard.length; i++) {
+        var row = gBoard[i];
+        for (var j = 0; j < row.length; j++) {
+            var cell = row[j];
+            if (row[j] !== '') return false
+        }
+
+    }
+    return true
 }
 
 //  TODO check all dead function
