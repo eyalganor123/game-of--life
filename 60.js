@@ -7,15 +7,16 @@
 
 console.log('%cEx. #60 Solution:\n', 'color:orange');
 
-var gRounds = .5
+var gRounds = 1
 var gGameInterval;
-var gRowSize = 5;
-var gColSize = 8;
+var interval = 500;
+var gRowSize = 10;
+var gColSize = 10;
 var gBoard = createBoard(gRowSize, gColSize);
 init()
 
 function init() {
-    populateInital(1);
+    populateInital(.5);
     console.table(gBoard)
     gGameInterval = setInterval(function () {
         play();
@@ -23,7 +24,7 @@ function init() {
         if (checkAllDead()) {
             clearInterval(gGameInterval)
         }
-    }, 1000);
+    }, interval);
 }
 
 function createBoard(rowSize, colSize) {
@@ -50,9 +51,7 @@ function populateInital(density) {
 }
 
 function runGeneration(board) {
-    var copyMat = {
-        ...board
-    };
+    var copyMat = [ ...board ];
     for (var i = 0; i < copyMat.length; i++) {
         var row = copyMat[i];
         for (var j = 0; j < row.length; j++) {
@@ -76,7 +75,7 @@ function runGeneration(board) {
 
 function play() {
     gBoard = runGeneration(gBoard);
-    // console.clear();
+    console.clear();
     console.table((gBoard));
 }
 
@@ -100,7 +99,7 @@ function countPeopleAround(pos) {
 function checkAllDead(
 
 ) {
-    return true
+    return false
 }
 
 //  TODO check all dead function
