@@ -99,7 +99,6 @@ function checkAllDead() {
     for (var i = 0; i < gBoard.length; i++) {
         var row = gBoard[i];
         for (var j = 0; j < row.length; j++) {
-            var cell = row[j];
             if (row[j] !== '') return false
         }
 
