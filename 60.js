@@ -9,9 +9,9 @@ console.log('%cEx. #60 Solution:\n', 'color:orange');
 
 var gRounds = 1;
 var gMaxRounds = 1000;
-var gInterval = 500;
-var gRowSize = 10;
-var gColSize = 10;
+var gInterval = 200;
+var gRowSize = 6;
+var gColSize = 6;
 var initialPopulationDensity = 1
 var gBoard = createBoard(gRowSize, gColSize);
 init()
@@ -105,5 +105,3 @@ function checkAllDead() {
     }
     return true
 }
-
-//  TODO check all dead function
