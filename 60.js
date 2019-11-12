@@ -7,7 +7,7 @@
 
 console.log('%cEx. #60 Solution:\n', 'color:orange');
 
-var gRounds = .5
+var gRounds = 1
 var gGameInterval;
 var gRowSize = 5;
 var gColSize = 8;
@@ -20,14 +20,14 @@ function init() {
     gGameInterval = setInterval(function () {
         play();
         gRounds++;
-        if (checkAllDead()) {
-            clearInterval(gGameInterval)
-        }
+        if (checkAllDead()){clearInterval(gGameInterval)}
     }, 1000);
 }
 
 function createBoard(rowSize, colSize) {
     var board = [];
+    var rowSize = rowSize;
+    var colSize = colSize;
     for (var i = 0; i < rowSize; i++) {
         board[i] = [];
         for (var j = 0; j < colSize; j++) {
@@ -35,39 +35,46 @@ function createBoard(rowSize, colSize) {
         }
     }
 
+
     return board;
 }
 
 function populateInital(density) {
-    for (var i = 0; i < gBoard.length; i++) {
-        var row = gBoard[i];
+
+    var board = gBoard;
+    var popDensity = density
+    for (var i = 0; i < board.length; i++) {
+        var row = board[i];
         for (var j = 0; j < row.length; j++) {
-            if (Math.random() < density) {
-                row[j] = 'X'
-            };
+            var cell = row[j];
+            var randomInt = Math.random();
+            if (randomInt < popDensity) board[i][j] = 'X';
         }
     }
+    // console.table(gBoard);
 }
 
 function runGeneration(board) {
-    var copyMat = {
-        ...board
+    var copyMat = JSON.parse(JSON.stringify(board));
+    var pos = {
+        i: 1,
+        j: 5
     };
     for (var i = 0; i < copyMat.length; i++) {
         var row = copyMat[i];
         for (var j = 0; j < row.length; j++) {
-            var pos = {
+            var cell = row[j];
+            pos = {
                 i: i,
                 j: j
             }
-            var peopleCount = countPeopleAround(pos);
-            if (peopleCount >= 3 && peopleCount <= 5) {
-                copyMat[i][j] = 'X';
-            } else   {
-                copyMat[i][j] = '';
-            }
+            if (countPeopleAround(pos) < 3 || countPeopleAround(pos) < 5) copyMat[i][j] = '';
+            else if (cell === '') copyMat[i][j] = 'X';
+
         }
+
     }
+    // console.table(copyMat);
     gBoard = copyMat;
 
 
@@ -96,11 +103,4 @@ function countPeopleAround(pos) {
     }
     return peopleCount;
 }
-
-function checkAllDead(
-
-) {
-    return true
-}
-
-//  TODO check all dead function
+function checkAllDead(){return true}
