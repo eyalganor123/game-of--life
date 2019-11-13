@@ -9,7 +9,7 @@ console.log('%cEx. #60 Solution:\n', 'color:orange');
 
 var gRounds = 1;
 var gMaxRounds = 1000;
-var gInterval = 200;
+var gInterval = 100;
 var gRowSize = 6;
 var gColSize = 6;
 var initialPopulationDensity = 1
