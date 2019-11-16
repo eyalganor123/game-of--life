@@ -1,5 +1,5 @@
 /*game of life
-
+    
 */
 
 'use strict'
