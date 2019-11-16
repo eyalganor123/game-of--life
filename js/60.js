@@ -15,7 +15,7 @@ var gBoard = createBoard(gRowSize, gColSize);
 init();
 
 function init() {
-    populateInital(1);
+    populateInital(.04);
     renderBoard(gBoard);
 
     gGameInterval = setInterval(function () {
