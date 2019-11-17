@@ -13,3 +13,8 @@ td {
     background-color:red;
     border-radius:50%;
 }
+.board {
+    position:fixed;
+    left:30%;
+    top:20%;
+}

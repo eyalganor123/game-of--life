@@ -1,5 +1,5 @@
 /*game of life
-    
+
 */
 
 'use strict'
@@ -8,23 +8,26 @@
 console.log('%cEx. #60 Solution:\n', 'color:orange');
 
 var gGameInterval;
-var gRowSize = 100;
-var gColSize = 100;
+var gRowSize = 50;
+var gColSize = 50;
 var LIFE ='o';
 var gBoard = createBoard(gRowSize, gColSize);
+var initialDensity = .08;
+
 init();
 
 function init() {
-    populateInital(.04);
+    populateInital(initialDensity);
     renderBoard(gBoard);
 
-    gGameInterval = setInterval(function () {
+    var gGameInterval = setInterval(function () {
         gBoard = runGeneration(gBoard);
 
-        if (checkAllDead()) {
-            clearInterval(gGameInterval)
+        if (checkAllDead()||gBoard === []) {
+            clearInterval(gGameInterval);
+            console.log(333);
         }
-    }, 65);
+    }, 100);
 }
 
 function createBoard(rowSize, colSize) {
@@ -55,8 +58,7 @@ function populateInital(density) {
     }
 }
 
-function runGeneration(board) {
-
+function runGeneration() {
     var copyMat = createBoard(gRowSize, gColSize);
     var pos = {
         i: 0,
@@ -69,8 +71,8 @@ function runGeneration(board) {
                 i: i,
                 j: j
             }
-
-            if (countPeopleAround(pos) < 3 || countPeopleAround(pos) > 5) {
+             if (countPeopleAround=== 3) row[j] = LIFE;
+             else if (countPeopleAround(pos) < 3 || countPeopleAround(pos) > 5) {
                 row[j] = '';
             } else row[j] = LIFE;
 
@@ -80,7 +82,6 @@ function runGeneration(board) {
     gBoard = copyMat;
 
     renderBoard(gBoard);
-    console.log(123);
     return copyMat
 }
 
@@ -104,7 +105,14 @@ function countPeopleAround(pos) {
 }
 
 function checkAllDead() {
-    return false
+    var countDead=0;
+    for (var i = 0; i < gRowSize; i++) {
+        for (var j = 0; j < gColSize; j++) {
+            if (gBoard[i][j] !== '') countDead++;
+        }
+    }
+    if (countDead === 0) {return true;}
+    else {return false;}
 }
 
 function renderBoard(gBoard) {
@@ -134,4 +142,8 @@ function copyMatt(gBoard) {
         }
     }
     return newMat;
+}
+function restart(){
+gBoard = createBoard(gRowSize, gColSize);
+ init();
 }
